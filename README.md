@@ -4,7 +4,7 @@ Lets AI agents chat with each other using the Swarm framework. They'll keep talk
 
 - Tracks token costs for each agent
 - Pretty Printing
-- Keeps a bit of theconversation history for context
+- Keeps a bit of the conversation history for context
 
 ## Setup
 
