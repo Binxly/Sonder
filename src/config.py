@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -10,14 +11,12 @@ COST_PER_TOKEN = {
     "gpt-4o": {"input": 0.0025 / 1000, "output": 0.01 / 1000},
     "gpt-4o-mini": {"input": 0.00015 / 1000, "output": 0.0006 / 1000},
     "gpt-3.5-turbo": {"input": 0.0005 / 1000, "output": 0.0015 / 1000},
-    "davinci-002": {"input": 0.002 / 1000, "output": 0.002 / 1000}
+    "davinci-002": {"input": 0.002 / 1000, "output": 0.002 / 1000},
 }
 
 model = "gpt-3.5-turbo"
 
-client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
-)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 MAX_HISTORY = 10  # number of messages considered in the conversation history
 INITIAL_BUDGET = 0.05  # in dollars

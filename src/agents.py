@@ -1,4 +1,5 @@
 from swarm import Agent
+
 from .config import model
 
 agent_one = Agent(
@@ -21,4 +22,4 @@ agent_two = Agent(
         f"Talk about anything you want. "
         f"Conversation history: {context.get('conversation_history', '')}"
     ),
-) 
+)
