@@ -26,16 +26,19 @@ def handle_agent_turn(
     current_cost,
 ):
     current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-    
+
     messages = [
-        {"role": "system", "content": "Speak freely and naturally, responding to the previous message if there is one."}
+        {
+            "role": "system",
+            "content": "Speak freely and naturally, responding to the previous message if there is one.",
+        }
     ]
-    
+
     if conversation_history:
         messages.append(conversation_history[-1])
-    
+
     context_variables["conversation_history"] = format_history(conversation_history)
-    
+
     response = client.run(
         agent=agent,
         messages=messages,
