@@ -3,7 +3,7 @@ import time
 from swarm import Swarm
 
 from src.agents import agent_one, agent_two
-from src.config import COST_PRINT_INTERVAL, INITIAL_BUDGET, MAX_HISTORY
+from src.config import COST_PRINT_INTERVAL, INITIAL_BUDGET
 from src.config import client as openai_client
 from src.ui import (
     console,
@@ -27,16 +27,13 @@ def handle_agent_turn(
 ):
     current_time = time.strftime("%Y-%m-%d %H:%M:%S")
     
-    # Create a more focused message structure
     messages = [
         {"role": "system", "content": "Speak freely and naturally, responding to the previous message if there is one."}
     ]
     
-    # Add the last message from the other agent if it exists
     if conversation_history:
         messages.append(conversation_history[-1])
     
-    # Update context variables with formatted history for reference
     context_variables["conversation_history"] = format_history(conversation_history)
     
     response = client.run(
@@ -87,18 +84,13 @@ def main():
                 console.print(f"Agent 2 spent: ${agent_2_cost:.4f}")
                 break
 
-            context_variables.update(
-                {
-                    "current_time": time.strftime("%Y-%m-%d %H:%M:%S"),
-                    "conversation_history": (
-                        f"Recent conversation history:\n{format_history(conversation_history)}\n\n"
-                        if conversation_history
-                        else ""
-                    ),
-                }
+            context_variables["current_time"] = time.strftime("%Y-%m-%d %H:%M:%S")
+            context_variables["conversation_history"] = (
+                f"Recent conversation history:\n{format_history(conversation_history)}\n\n"
+                if conversation_history
+                else ""
             )
 
-            # Agent turns
             agent_1_cost = handle_agent_turn(
                 agent_one,
                 context_variables,
